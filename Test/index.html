@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Sentiment Analysis</title>
+  </head>
+<style type=text/css>
+  .button1{
+    margin:4px;
+  }
+  p{
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace;
+  }
+    #Synthetic{
+      margin-top:1pxcd ;
+      margin-left:30%;
+      margin-right:30%;
+      font-size:15px;
+    }
+    #Currency{
+      margin-top:1pxcd ;
+      margin-left:30%;
+      margin-right:30%;
+      font-size:15px;
+    }
+    h1{
+      text-align: center;
+    }
+    #Twitter{
+        margin: 10%;
+        font-size: 15px;
+    }
+    table{
+        border:1px solid black;
+        border-collapse: collapse;
+    }
+    th{
+        border:1px solid black;
+        border-collapse: collapse;
+        text-align:centre;
+    }
+    td{
+      border:1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+  <body>
+    <div>
+      <h1>MUSTAFA DATA VIZUALIZATION</h1>
+      <h1>WEBSITE</h1>
+      <hr>
+    </div>
+    <div>
+      <h3>VISUALIZATION:</h3>
+      <p>SYNTHETIC DATA -></p>
+      <input class="button1"
+        type="button"
+        onclick='window.open("https://plot.ly/~powell123/0")'
+        value="Graph"
+      />
+      <br>
+      <p>CURRENCY DATA USA -></p>
+      <input class="button1" 
+      type="button" 
+      onclick='window.open("https://chart-studio.plotly.com/~powell123/13/usd-value/#/")' 
+      value="Graph"/>
+      <br>
+      <p>CURRENCY DATA INR -></p>
+      <input 
+      class="button1" 
+      type="button" 
+      onclick='window.open("https://plotly.com/~powell123/6")' 
+      value="Graph"/>
+      <br>
+      <p>CURRENCY DATA CAD -></p>
+      <input 
+      class="button1" 
+      type="button" 
+      onclick='window.open("https://plotly.com/~powell123/8/cad-value/")' 
+      value="Graph"/>
+      <br>
+      <p>CURRENCY DATA ZWL -></p>
+      <input 
+      class="button1" 
+      type="button" 
+      onclick='window.open("https://plotly.com/~powell123/10/zwl-value/#/")' 
+      value="Graph" />
+    <hr>
+    </div>
+    <div>
+    <h3>FURTHER SENTIMENT ANALYSIS:</h3>
+    <table id="Twitter"></table>
+    <script>
+      const url = "http://54.86.15.124:3000/Twitter";
+      fetch(url)
+        .then(function (res) {
+
+          return res.json();
+
+        })
+        .then(function (data) {
+
+          console.table(data);
+
+          var table = document.getElementById("Twitter")
+          var header = document.createElement("tr");
+          table.appendChild(header);
+          var th1 = document.createElement("th");
+          var th2 = document.createElement("th");
+          var th3 = document.createElement("th");
+
+          header.appendChild(th1).appendChild(document.createTextNode("ID"));
+          header.appendChild(th2).appendChild(document.createTextNode("Tweets"));
+          header.appendChild(th3).appendChild(document.createTextNode("Sentiments"));
+
+          for (var x = 0; x < 16; x++) {
+            var row = document.createElement("tr");
+            table.appendChild(row);
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+
+            var id = document.createTextNode(data[x].id);
+            var tweets = document.createTextNode(data[x].tweets);
+            var sentiments = document.createTextNode(data[x].sentiments);
+
+            row.appendChild(td1).appendChild(id);
+            row.appendChild(td2).appendChild(tweets);
+            row.appendChild(td3).appendChild(sentiments);
+          }
+        });
+    </script>
+    <hr>
+    </div>
+    <div>
+      <h3>PREDICTION:</h3>
+      <p>CURRENCY DATA PREDICTION:</p>
+      <table id = "Currency"></table>
+    </div>
+    <div>
+      <p>SYNTHETIC DATA PREDICTION:</p>
+      <table id="Synthetic"></table>
+      <hr>
+    </div>
+  </body>
+  <script>
+      const url1 = "http://54.86.15.124:3000/Currency";
+      fetch(url1).then(function(res){
+        return res.json();
+      }).then(function(data){
+        console.table(data);
+        var table = document.getElementById("Currency")
+        var header = document.createElement("tr");
+        table.appendChild(header);
+        var th1 = document.createElement("th");
+        var th2 = document.createElement("th");
+        var th3 = document.createElement("th");
+        var th4 = document.createElement("th");
+        var th5 = document.createElement("th");
+
+
+        header.appendChild(th1).appendChild(document.createTextNode("Date"));
+        header.appendChild(th2).appendChild(document.createTextNode("CAD"));
+        header.appendChild(th3).appendChild(document.createTextNode("USD"));
+        header.appendChild(th4).appendChild(document.createTextNode("INR")); 
+        header.appendChild(th5).appendChild(document.createTextNode("ZWL"));
+
+        for (var x = 0; x < 16; x++) {
+          var row = document.createElement("tr");
+          table.appendChild(row);
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
+          var td3 = document.createElement("td");
+          var td4 = document.createElement("td");
+          var td5 = document.createElement("td");
+
+
+          var date = document.createTextNode(data[x].Date);
+          var CAD = document.createTextNode(data[x].CAD);
+          var USD = document.createTextNode(data[x].USD);
+          var INR = document.createTextNode(data[x].INR);
+          var ZWL = document.createTextNode(data[x].ZWL);
+
+          row.appendChild(td1).appendChild(date);
+          row.appendChild(td2).appendChild(CAD);
+          row.appendChild(td3).appendChild(USD);
+          row.appendChild(td4).appendChild(INR);
+          row.appendChild(td5).appendChild(ZWL);
+
+        }
+      })
+      const url2 = "http://54.86.15.124:3000/Synthetic"
+      fetch(url2).then(function(res){
+        return res.json();
+      }).then(function(data){
+        console.table(data);
+        var table = document.getElementById("Synthetic");
+        var header = document.createElement("tr");
+        
+        table.appendChild(header);
+        var th1 = document.createElement("th");
+        var th2 = document.createElement("th");
+
+        header.appendChild(th1).appendChild(document.createTextNode("Index"));
+        header.appendChild(th2).appendChild(document.createTextNode("Value"));
+
+        for(x in data){
+          var row = document.createElement("tr");
+          table.appendChild(row);
+
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
+
+          var index = document.createTextNode(data[x].index);
+          var value = document.createTextNode(data[x].Value);
+
+          row.appendChild(td1).appendChild(index);
+          row.appendChild(td2).appendChild(value);
+        }
+      })
+  </script>
+</html>
